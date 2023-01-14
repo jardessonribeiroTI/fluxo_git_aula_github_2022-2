@@ -11,7 +11,7 @@ public class ContaCorrente extends ContaBase implements Conta{
     @Override
     public String informacoesConta() {
        String info = "Conta :"+this.getNumero()+
-                    "\n saldo: "+this.getSaldo();
+                    "\nsaldo: "+this.getSaldo();
         
         return info;
     }
