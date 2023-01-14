@@ -3,7 +3,7 @@ package models;
 import enums.TipoConta;
 
 public class ContaCorrente extends ContaBase implements Conta{
-    
+
     public ContaCorrente(){
         super(TipoConta.CORRENTE);
     }

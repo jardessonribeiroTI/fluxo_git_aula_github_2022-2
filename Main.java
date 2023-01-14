@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import database.ContaDatabase;
+import enums.TipoConta;
 import menus.Menu;
 import menus.MenuConta;
 import models.Conta;
@@ -94,22 +95,40 @@ public class Main {
 							System.out.println("Depositar na conta");
 							break;
 						case 2:
-							System.out.println("Sacar dinheiro");
+							Scanner inputSaque= new Scanner(System.in);
+							System.out.println("Digite o numero da conta: ");
+							Long numeroConta = inputSaque.nextLong();
+							Conta conta = contaDatabase.buscarPorId(numeroConta);
+							if(conta == null){
+								System.out.println("Nenhuma conta encontrada para o id "+ numeroConta);
+							}else {
+								ContaBase contaBase = (ContaBase) conta;
+								System.out.println("Digite o valor a ser sacado: ");
+								Double valorSaque = inputSaque.nextDouble();
+								if(valorSaque>(contaBase.getSaldo())){
+									System.out.println("Voce nao possui saldo suficiente para o saque.");
+								}
+								else{
+									contaBase.setSaldo(contaBase.getSaldo()-valorSaque);
+									contaBase.adicionarHistorico("Saque de R$"+valorSaque);
+									System.out.println("Saque realizado com sucesso.");
+								}
+							}
 							break;
 						case 3:
 							System.out.println("Transferir para outra conta");
 							break;
 						case 4:
-							Scanner inputOperacoes= new Scanner(System.in);
+							Scanner inputHistorico= new Scanner(System.in);
 							System.out.println("Informe o id da conta: ");
-							Long numeroConta = inputOperacoes.nextLong();
-							Conta conta = contaDatabase.buscarPorId(numeroConta);
-							if(conta == null){
-								System.out.println("Nenhuma conta encontrada para o id "+ numeroConta);
+							Long nConta = inputHistorico.nextLong();
+							Conta c = contaDatabase.buscarPorId(nConta);
+							if(c == null){
+								System.out.println("Nenhuma conta encontrada para o id "+ nConta);
 							}else {
 								System.out.println("-----------------------------");
 								System.out.println("Historico da conta: ");
-								for (String operacao : ((ContaBase)conta).getHistorico()) {
+								for (String operacao : ((ContaBase)c).getHistorico()) {
 									System.out.println(operacao);	
 								}
 								System.out.println("-----------------------------");
