@@ -1,6 +1,6 @@
 package models;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import enums.TipoConta;
 
@@ -10,7 +10,7 @@ public abstract class ContaBase {
     private double saldo;
 
     public ContaBase(TipoConta tipoConta){
-        this.numero = LocalDate.now().toEpochDay();
+        this.numero = new Date().getTime();
         this.tipoConta =  tipoConta;
         this.saldo = 0;
     }
