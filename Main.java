@@ -85,12 +85,21 @@ public class Main {
 					break;
 				case 3:
 					System.out.println("Entrou");
-					Menu operationsMenu = new Menu("Menu Operacoes", Arrays.asList("Mostrar Historico", "Voltar"));
+					Menu operationsMenu = new Menu("Menu Operacoes", Arrays.asList("Depositar na conta","Sacar dinheiro","Transferir para outra conta","Mostrar Historico", "Voltar"));
 					int opOperations = 0;
-					while (opOperations != 2){
+					while (opOperations != 5){
 						opOperations = operationsMenu.getSelection();
 						switch (opOperations) {
 						case 1:
+							System.out.println("Depositar na conta");
+							break;
+						case 2:
+							System.out.println("Sacar dinheiro");
+							break;
+						case 3:
+							System.out.println("Transferir para outra conta");
+							break;
+						case 4:
 							Scanner inputOperacoes= new Scanner(System.in);
 							System.out.println("Informe o id da conta: ");
 							Long numeroConta = inputOperacoes.nextLong();
@@ -106,7 +115,7 @@ public class Main {
 								System.out.println("-----------------------------");
 							}
 							break;
-						case 2:
+						case 5:
 							System.out.println("Voltar");
 							break;
 						default:
