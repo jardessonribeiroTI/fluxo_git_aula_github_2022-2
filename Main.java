@@ -6,6 +6,7 @@ import database.ContaDatabase;
 import menus.Menu;
 import menus.MenuConta;
 import models.Conta;
+import models.ContaBase;
 import models.ContaCorrente;
 import models.ContaPoupanca;
 
@@ -81,6 +82,38 @@ public class Main {
 					}else {
 						System.out.println("Opção não válida");
 					}
+					break;
+				case 3:
+					System.out.println("Entrou");
+					Menu operationsMenu = new Menu("Menu Operacoes", Arrays.asList("Mostrar Historico", "Voltar"));
+					int opOperations = 0;
+					while (opOperations != 2){
+						opOperations = operationsMenu.getSelection();
+						switch (opOperations) {
+						case 1:
+							Scanner inputOperacoes= new Scanner(System.in);
+							System.out.println("Informe o id da conta: ");
+							Long numeroConta = inputOperacoes.nextLong();
+							Conta conta = contaDatabase.buscarPorId(numeroConta);
+							if(conta == null){
+								System.out.println("Nenhuma conta encontrada para o id "+ numeroConta);
+							}else {
+								System.out.println("-----------------------------");
+								System.out.println("Historico da conta: ");
+								for (String operacao : ((ContaBase)conta).getHistorico()) {
+									System.out.println(operacao);	
+								}
+								System.out.println("-----------------------------");
+							}
+							break;
+						case 2:
+							System.out.println("Voltar");
+							break;
+						default:
+							break;
+						}
+					}
+					break;
 			}
 		}
 	}
