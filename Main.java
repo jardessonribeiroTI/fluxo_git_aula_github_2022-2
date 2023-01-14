@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +16,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		criarConta();
+		List<Client> clients = new ArrayList<Client>();
 		Menu mainMenu =  new Menu("Menu Principal", Arrays.asList("Conta", "Cliente", "Operacoes", "Sair"));
 		int op = 0;
 		while (op != 4){
@@ -27,13 +29,17 @@ public class Main {
 						opClient = clientMenu.getSelection();
 						switch (opClient) {
 						case 1:
-							System.out.println("Cadastrar Cliente");
+							clients.add(Client.registerClient());
+							System.out.println("Cliente cadastrado com sucesso!\n");
 							break;
 						case 2:
-							System.out.println("Listar Clientes");
+							for (Client client : clients) {
+								System.out.println(client);
+							}
+							System.out.println("");
 							break;
 						case 3:
-							System.out.println("Voltar");
+							System.out.println("Voltar\n");
 							break;
 						default:
 							break;
