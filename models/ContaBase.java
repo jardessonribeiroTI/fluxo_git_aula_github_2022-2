@@ -25,6 +25,10 @@ public abstract class ContaBase {
         return this.saldo;
     }
 
+    public void setSaldo(Double saldo){
+        this.saldo=saldo;
+    }
+
     public TipoConta getTipoConta(){
         return this.tipoConta;
     }
