@@ -20,4 +20,11 @@ public class ContaPoupanca extends ContaBase implements Conta {
     public Long getId() {
         return this.getNumero();
     }
+
+    @Override
+    public double deposito(double valor){
+        setSaldo(this.getSaldo() + valor);
+
+        return this.getSaldo();
+    }
 }

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import database.ContaDatabase;
 import menus.Menu;
 import menus.MenuConta;
+import menus.MenuOperacoes;
 import models.Conta;
 import models.ContaCorrente;
 import models.ContaPoupanca;
@@ -87,6 +88,34 @@ public class Main {
 					}else {
 						System.out.println("Opção não válida");
 					}
+					break;
+				case 3:
+					Scanner inputOperacoes = new Scanner(System.in);
+					Menu menuOperacoes = new MenuOperacoes();
+					int opcaoOperacao = menuOperacoes.getSelection();
+					if(opcaoOperacao == 1){
+						System.out.println("Informe o id da conta em que quer depositar: ");
+						Long numeroConta = inputOperacoes.nextLong();
+						Conta conta = contaDatabase.buscarPorId(numeroConta);
+						if(conta == null){
+							System.out.println("nenhuma conta encontrada para o id "+numeroConta);
+						}else {
+							System.out.println(conta.informacoesConta());
+							System.out.println("Digite o valor do deposito: ");
+							double valor = inputOperacoes.nextDouble();
+							double saldo = conta.deposito(valor);
+							System.out.println("Saldo da conta:  " + saldo);
+
+						}
+
+						
+						
+					}else if(opcaoOperacao == 2){
+						
+					}
+					
+
+
 			}
 		}
 	}
