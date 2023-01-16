@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import database.ContaDatabase;
+import enums.TipoConta;
 import menus.Menu;
 import menus.MenuConta;
 import models.Conta;
@@ -91,28 +92,55 @@ public class Main {
 					break;
 				case 3:
 					System.out.println("Entrou");
-					Menu operationsMenu = new Menu("Menu Operacoes", Arrays.asList("Mostrar Historico", "Voltar"));
+					Menu operationsMenu = new Menu("Menu Operacoes", Arrays.asList("Depositar na conta","Sacar dinheiro","Transferir para outra conta","Mostrar Historico", "Voltar"));
 					int opOperations = 0;
-					while (opOperations != 2){
+					while (opOperations != 5){
 						opOperations = operationsMenu.getSelection();
 						switch (opOperations) {
 						case 1:
-							Scanner inputOperacoes= new Scanner(System.in);
-							System.out.println("Informe o id da conta: ");
-							Long numeroConta = inputOperacoes.nextLong();
+							System.out.println("Depositar na conta");
+							break;
+						case 2:
+							Scanner inputSaque= new Scanner(System.in);
+							System.out.println("Digite o numero da conta: ");
+							Long numeroConta = inputSaque.nextLong();
 							Conta conta = contaDatabase.buscarPorId(numeroConta);
 							if(conta == null){
 								System.out.println("Nenhuma conta encontrada para o id "+ numeroConta);
 							}else {
+								ContaBase contaBase = (ContaBase) conta;
+								System.out.println("Digite o valor a ser sacado: ");
+								Double valorSaque = inputSaque.nextDouble();
+								if(valorSaque>(contaBase.getSaldo())){
+									System.out.println("Voce nao possui saldo suficiente para o saque.");
+								}
+								else{
+									contaBase.setSaldo(contaBase.getSaldo()-valorSaque);
+									contaBase.adicionarHistorico("Saque de R$"+valorSaque);
+									System.out.println("Saque realizado com sucesso.");
+								}
+							}
+							break;
+						case 3:
+							System.out.println("Transferir para outra conta");
+							break;
+						case 4:
+							Scanner inputHistorico= new Scanner(System.in);
+							System.out.println("Informe o id da conta: ");
+							Long nConta = inputHistorico.nextLong();
+							Conta c = contaDatabase.buscarPorId(nConta);
+							if(c == null){
+								System.out.println("Nenhuma conta encontrada para o id "+ nConta);
+							}else {
 								System.out.println("-----------------------------");
 								System.out.println("Historico da conta: ");
-								for (String operacao : ((ContaBase)conta).getHistorico()) {
+								for (String operacao : ((ContaBase)c).getHistorico()) {
 									System.out.println(operacao);	
 								}
 								System.out.println("-----------------------------");
 							}
 							break;
-						case 2:
+						case 5:
 							System.out.println("Voltar");
 							break;
 						default:
