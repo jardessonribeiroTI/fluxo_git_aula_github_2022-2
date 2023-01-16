@@ -23,7 +23,16 @@ public abstract class ContaBase {
         return this.saldo;
     }
 
+    public void setSaldo(double valor){
+        saldo = valor;
+    }
+
     public TipoConta getTipoConta(){
         return this.tipoConta;
+    }
+    public double deposito(double valor){
+        saldo += valor;
+
+        return saldo;
     }
 }
