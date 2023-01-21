@@ -49,13 +49,13 @@ public class Client {
         return "Client [name=" + name + ", age=" + age + ", cpf=" + cpf + ", email=" + email + "]";
     }
 
-    public Client registerClient() {
+    public static Client registerClient() {
         System.out.println("Digite o nome do cliente: ");
         Scanner s = new Scanner(System.in);
         String name = s.nextLine();
-        System.out.println("Digite a idade do cliente: ");
+        System.out.println("Digite a idade do cliente(Apenas numeros): ");
         Integer age = Integer.parseInt(s.nextLine());
-        System.out.println("Digite o CPF do cliente: ");
+        System.out.println("Digite o CPF do cliente(Apenas numeros): ");
         Integer cpf = Integer.parseInt(s.nextLine());
         System.out.println("Digite o email do cliente: ");
         String email = s.nextLine();
