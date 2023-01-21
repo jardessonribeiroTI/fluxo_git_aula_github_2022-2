@@ -118,7 +118,7 @@ public class Main {
 										if(contaCorrente.getLimite()>=valorSaque-contaBase.getSaldo()){
 											int resposta = 0;
 											while(resposta!=2){
-												System.out.println("Voce possui o limite de R$500.00 para usar mas terá que pagar juros de 10% caso retire desse valor.");
+												System.out.println("Voce possui o limite de R$"+contaCorrente.getLimite()+" para usar mas terá que pagar juros de 10% caso retire desse valor.");
 												System.out.println("Deseja usar seu limite?");
 												System.out.println("1-Sim");
 												System.out.println("2-Nao");
